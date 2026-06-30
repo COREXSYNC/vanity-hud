@@ -57,13 +57,13 @@
     <h1>Aesthetic Vanity</h1>
 
     <div class="button-container">
-        <button class="vanity-btn" onclick="sendCustomData('eyes', 'style1')">Eye's</button>
-        <button class="vanity-btn" onclick="sendCustomData('brows', 'style1')">Brow's</button>
-        <button class="vanity-btn" onclick="sendCustomData('lashes', 'style1')">Lashes</button>
-        <button class="vanity-btn" onclick="sendCustomData('lips', 'style1')">Lip's</button>
-        <button class="vanity-btn" onclick="sendCustomData('blush', 'style1')">Blush</button>
-        <button class="vanity-btn" onclick="sendCustomData('moles', 'style1')">Moles</button>
-        <button class="vanity-btn" onclick="sendCustomData('tattoos', 'style1')">Tattoo's</button>
+        <button class="vanity-btn" onclick="sendCustomData(this, 'eyes', 'style1')">Eye's</button>
+        <button class="vanity-btn" onclick="sendCustomData(this, 'brows', 'style1')">Brow's</button>
+        <button class="vanity-btn" onclick="sendCustomData(this, 'lashes', 'style1')">Lashes</button>
+        <button class="vanity-btn" onclick="sendCustomData(this, 'lips', 'style1')">Lip's</button>
+        <button class="vanity-btn" onclick="sendCustomData(this, 'blush', 'style1')">Blush</button>
+        <button class="vanity-btn" onclick="sendCustomData(this, 'moles', 'style1')">Moles</button>
+        <button class="vanity-btn" onclick="sendCustomData(this, 'tattoos', 'style1')">Tattoo's</button>
     </div>
 
     <iframe name="secret_frame" style="display:none;"></iframe>
@@ -72,13 +72,21 @@
     </form>
 
     <script>
-        function sendCustomData(targetPart, colorName) {
-            const urlParams = new URLSearchParams(window.location.search);
-            const simUrl = urlParams.get('sim_url');
+        function sendCustomData(buttonElement, targetPart, colorName) {
+            // Grabs everything after the '#' in the address bar
+            let simUrl = window.location.hash.substring(1);
 
-            if (!simUrl) return;
+            // The Visual Tripwire
+            if (!simUrl) {
+                buttonElement.innerText = "URL BLOCKED";
+                buttonElement.style.borderColor = "#ff4444";
+                buttonElement.style.color = "#ff4444";
+                return;
+            }
 
-            // Load the hidden form with your button data and force it to submit
+            // Decode the URL to ensure it is clean
+            simUrl = decodeURIComponent(simUrl);
+
             const form = document.getElementById('sl_form');
             const input = document.getElementById('payload_data');
             
