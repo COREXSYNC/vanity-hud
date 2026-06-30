@@ -66,21 +66,25 @@
         <button class="vanity-btn" onclick="sendCustomData('tattoos', 'style1')">Tattoo's</button>
     </div>
 
+    <iframe name="secret_frame" style="display:none;"></iframe>
+    <form id="sl_form" method="POST" target="secret_frame" style="display:none;">
+        <input type="hidden" id="payload_data" name="data">
+    </form>
+
     <script>
         function sendCustomData(targetPart, colorName) {
             const urlParams = new URLSearchParams(window.location.search);
             const simUrl = urlParams.get('sim_url');
 
-            if (!simUrl) return; // Silently aborts if not connected to the viewer
+            if (!simUrl) return;
 
-            // Packages the raw text command
-            const payload = targetPart + "," + colorName;
-
-            // Silently fires the command to the LSL script
-            fetch(simUrl, {
-                method: 'POST',
-                body: payload
-            });
+            // Load the hidden form with your button data and force it to submit
+            const form = document.getElementById('sl_form');
+            const input = document.getElementById('payload_data');
+            
+            form.action = simUrl;
+            input.value = targetPart + "," + colorName;
+            form.submit();
         }
     </script>
 </body>
