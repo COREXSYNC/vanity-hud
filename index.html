@@ -30,7 +30,7 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 16px; /* Negative-space gaps between buttons */
-            max-width: 400px;
+            max-width: 500px;
         }
 
         .vanity-btn {
@@ -43,6 +43,7 @@
             font-size: 14px;
             cursor: pointer;
             transition: all 0.2s ease;
+            width: 140px; /* Makes all buttons a uniform size */
         }
 
         .vanity-btn:hover {
@@ -56,10 +57,14 @@
     <h1>Aesthetic Vanity</h1>
 
     <div class="button-container">
-        <!-- Add or modify your buttons here -->
-        <button class="vanity-btn" onclick="sendCustomData('eyes', 'blue')">Blue Eyes</button>
-        <button class="vanity-btn" onclick="sendCustomData('lips', 'red')">Red Lips</button>
-        <button class="vanity-btn" onclick="sendCustomData('lips', 'black')">Black Lips</button>
+        <!-- Main Category Buttons -->
+        <button class="vanity-btn" onclick="sendCustomData('eyes', 'style1')">Eye's</button>
+        <button class="vanity-btn" onclick="sendCustomData('brows', 'style1')">Brow's</button>
+        <button class="vanity-btn" onclick="sendCustomData('lashes', 'style1')">Lashes</button>
+        <button class="vanity-btn" onclick="sendCustomData('lips', 'style1')">Lip's</button>
+        <button class="vanity-btn" onclick="sendCustomData('blush', 'style1')">Blush</button>
+        <button class="vanity-btn" onclick="sendCustomData('moles', 'style1')">Moles</button>
+        <button class="vanity-btn" onclick="sendCustomData('tattoos', 'style1')">Tattoo's</button>
     </div>
 
     <script>
@@ -92,4 +97,3 @@
     </script>
 </body>
 </html>
-
