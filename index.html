@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aesthetic Vanity HUD</title>
+    <title>COREX//SYNC Vanity</title>
     <style>
         body {
             background-color: #1a1a1a;
@@ -54,7 +54,7 @@
 </head>
 <body>
 
-    <h1>Aesthetic Vanity</h1>
+    <h1>COREX//SYNC Vanity</h1>
 
     <div class="button-container">
         <button class="vanity-btn" onclick="sendCustomData(this, 'eyes', 'style1')">Eye's</button>
@@ -73,10 +73,10 @@
 
     <script>
         function sendCustomData(buttonElement, targetPart, colorName) {
-            // Grabs everything after the '#' in the address bar
+            // Grabs the secure URL passed from the LSL script via the hash
             let simUrl = window.location.hash.substring(1);
 
-            // The Visual Tripwire
+            // Visual check if the URL is blocked or missing
             if (!simUrl) {
                 buttonElement.innerText = "URL BLOCKED";
                 buttonElement.style.borderColor = "#ff4444";
@@ -84,14 +84,16 @@
                 return;
             }
 
-            // Decode the URL to ensure it is clean
+            // Decode the URL for the form action
             simUrl = decodeURIComponent(simUrl);
 
             const form = document.getElementById('sl_form');
             const input = document.getElementById('payload_data');
             
             form.action = simUrl;
-            input.value = targetPart + "," + colorName;
+            // PREPEND "cmd=" SO THE LSL SCRIPT PARSES IT CORRECTLY
+            input.value = "cmd=" + targetPart + "," + colorName;
+            
             form.submit();
         }
     </script>
